@@ -1,5 +1,7 @@
 import logging
 import os
+
+import uvicorn
 from fastapi import FastAPI
 from vocode.streaming.models.telephony import TwilioConfig
 from pyngrok import ngrok
@@ -67,3 +69,6 @@ telephony_server = TelephonyServer(
 )
 
 app.include_router(telephony_server.get_router())
+
+if __name__ == "__main__":
+    uvicorn.run("main:app", host="127.0.0.1", port=3000, log_level="info")
